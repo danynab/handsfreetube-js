@@ -168,6 +168,7 @@ function search() {
   annyang.abort();
   recognition.start();
   openSearchPanel();
+  $('.search.open').removeClass('expand');
   $('.search').addClass('recording');
   $('.search input').val('');
   console.log("Looking for...");

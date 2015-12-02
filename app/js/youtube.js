@@ -1,10 +1,6 @@
 var key = 'AIzaSyAcOL57GkIJe2IfxF_33EloOd8AAhkjcko';
 var baseUrl = 'https://www.googleapis.com/youtube/v3';
 
-$(document).ready(function() {
-  searchPlaylists('nickelback');
-});
-
 function searchPlaylists(query) {
   var url = makeUrl(query);
   $.get(url, function(data) {
@@ -13,7 +9,7 @@ function searchPlaylists(query) {
         var id = item.id.playlistId;
         var snippet = item.snippet;
         var title = snippet.title;
-        var thumbnail = snippet.thumbnails.default.url;
+        var thumbnail = snippet.thumbnails.high.url;
         return {
           id: id,
           title: title,

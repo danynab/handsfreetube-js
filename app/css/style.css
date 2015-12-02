@@ -32,14 +32,14 @@ body {
   background: none;
   color: white;
   position: absolute;
-  top:1em;
+  top: 1em;
   outline: none;
   left: 60px;
 }
 .search i.fa-search {
   position: absolute;
   left: 10px;
-  top:0.8em;
+  top: 0.8em;
 }
 .search i.fa-circle {
   transition: .5s ease-in-out;
@@ -48,7 +48,7 @@ body {
   right: 10px;
   font-size: 1em;
   color: red;
-  top:1.5em;
+  top: 1.5em;
 }
 .search.recording i.fa-circle {
   opacity: 1;
@@ -68,7 +68,44 @@ body {
 .search.open .bg {
   left:0;
 }
-
+.search.open.expand .bg {
+  height: 1200px;
+  width: 100%;
+}
+.search.open.expand {
+  height: 100%;
+}
+.search .results {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 4em;
+}
+.search-result {
+  width: 320px;
+  height: 200px;
+  position: relative;
+  display: block;
+  margin: 10px auto;
+}
+.search-result img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.search-result .title {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 99;
+  background: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+}
+.search-result p {
+  margin: 0 10px;
+  padding-top: 10px;
+  font-size: 1.5em;
+  color: white;
+}
 .sidemenu {
   height: 100%;
   width: 350px;
@@ -256,6 +293,7 @@ body {
 .right-icons {
   transition: .5s ease-in-out;
   position: absolute;
+  height: 100%;
   top: 0;
   right: 0;
   padding: 20px;
