@@ -33,10 +33,13 @@ $(document).ready(function() {
 
 });
 
-
 function showPlaylist() {
   $('#nav-icon').toggleClass('open');
   $('.sidemenu').toggleClass('open');
   $('.content').toggleClass('blur');
   $('.right-icons').toggleClass('blur');
+}
+
+function onPlaylistsSearchResults(playlists) {
+  console.log(playlists);
 }

@@ -1,27 +1,31 @@
+$(document).ready(function() {
+
+});
+
 function up() {
-    volumeUp();
+  volumeUp();
 }
 
 function down() {
-    volumeDown();
+  volumeDown();
 }
 
 function left() {
-    nextVideo();
+  nextVideo();
 }
 
 function right() {
-    previousVideo();
+  previousVideo();
 }
 
-gest.start();
+//gest.start();
 gest.options.sensitivity(80);
 
 gest.options.subscribeWithCallback(function(gesture) {
-    if(gesture.up) up();
-    else if(gesture.down) down();
-    else if(gesture.left) left();
-    else if(gesture.right) right();
+  if (gesture.up) up();
+  else if (gesture.down) down();
+  else if (gesture.left) left();
+  else if (gesture.right) right();
 });
 
 var tag = document.createElement('script');
@@ -30,79 +34,81 @@ var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var player;
+
 function onYouTubeIframeAPIReady() {
-    player = new YT.Player('video', {
-        height: '390',
-        width: '640',
-        playerVars: {
-          listType: 'playlist',
-          list: 'PLxXJWa4J5wHroL1uRodUAeJlaOMs0-Ylc',
-          controls: 0,
-          iv_load_policy: 3,
-          showinfo: 0,
-        },
-        events: {
-        'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
-        }
-    });
+  player = new YT.Player('video-frame', {
+    height: '390',
+    width: '640',
+    playerVars: {
+      listType: 'playlist',
+      list: 'PLxXJWa4J5wHroL1uRodUAeJlaOMs0-Ylc',
+      controls: 0,
+      iv_load_policy: 3,
+      showinfo: 0,
+    },
+    events: {
+      'onReady': onPlayerReady,
+      'onStateChange': onPlayerStateChange
+    }
+  });
 }
 
 function onPlayerReady(event) {
-    setCurrentVolume();
-    changeTitle();
-    fillPlaylist();
-    //event.target.playVideo();
+  setCurrentVolume();
+  changeTitle();
+  fillPlaylist();
+  //event.target.playVideo();
 }
 
 var done = false;
+
 function onPlayerStateChange(event) {
-    if (event.data == YT.PlayerState.PLAYING && !done) {
-          //setTimeout(stopVideo, 6000);
-          done = true;
-    }
+  if (event.data == YT.PlayerState.PLAYING && !done) {
+    //setTimeout(stopVideo, 6000);
+    done = true;
+  }
 }
 
 function stopVideo() {
-    player.pauseVideo();
-    $('.play').toggleClass('fa-play', true);
-    $('.play').toggleClass('fa-pause', false);
+  player.pauseVideo();
+  $('.play').toggleClass('fa-play', true);
+  $('.play').toggleClass('fa-pause', false);
 }
 
 function playVideo() {
-    player.playVideo();
-    $('.play').toggleClass('fa-play', false);
-    $('.play').toggleClass('fa-pause', true);
-    changeTitle();
-    fillPlaylist();
+  player.playVideo();
+  $('.play').toggleClass('fa-play', false);
+  $('.play').toggleClass('fa-pause', true);
+  changeTitle();
+  fillPlaylist();
 }
 
 function nextVideo() {
-    player.nextVideo();
-    fillPlaylist();
+  player.nextVideo();
+  fillPlaylist();
 }
 
 function previousVideo() {
-    player.previousVideo();
-    fillPlaylist();
+  player.previousVideo();
+  fillPlaylist();
 }
 
 function volumeUp() {
-    player.setVolume(player.getVolume() + 10);
-    setCurrentVolume();
+  player.setVolume(player.getVolume() + 10);
+  setCurrentVolume();
 
 }
 
 function volumeDown() {
-    player.setVolume(player.getVolume() - 10);
-    setCurrentVolume();
+  player.setVolume(player.getVolume() - 10);
+  setCurrentVolume();
 }
 
 function changeVideoState() {
   var state = player.getPlayerState();
-  if([-1, 0, 2, 5].indexOf(state) >= 0)
+  if ([-1, 0, 2, 5].indexOf(state) >= 0)
     playVideo();
-  else if(state == 1)
+  else if (state == 1)
     stopVideo();
 }
 
@@ -120,23 +126,44 @@ function fillPlaylist() {
   // Fill playlist menu
   var list = "<ul>"
   player.getPlaylist().forEach(function(videoID) {
-    list += "<li class='playlist-item'>" + videoID +  "</li>";
+    list += "<li class='playlist-item'>" + videoID + "</li>";
   });
   list += "</ul>"
 
   $('.sidemenu').append(list);
 }
 
-if (annyang) {
-    var commands = {
-        'play': playVideo,
-        'stop': stopVideo,
-        'playlist': showPlaylist
-    };
-
-    annyang.addCommands(commands);
-
+var recognition = new webkitSpeechRecognition();
+recognition.continuous = false;
+recognition.interimResults = true;
+recognition.onresult = function(event) {
+  var result = event.results[event.results.length -1];
+  //console.log('confidence: ' + result[0].confidence + ' - transcript: ' + result[0].transcript + ' - isFinal: ' + result.isFinal)
+  if (result.isFinal) {
+    var transcript = result[0].transcript;
+    console.log(transcript);
+    searchPlaylists(transcript);
     annyang.start();
+  }
+}
+
+if (annyang) {
+  var commands = {
+    'play': playVideo,
+    'stop': stopVideo,
+    'playlist': showPlaylist,
+    'look for': search
+  };
+
+  annyang.addCommands(commands);
+
+  annyang.start();
+}
+
+function search() {
+  annyang.abort();
+  recognition.start();
+  console.log("Looking for...");
 }
 
 setInterval(function() {
@@ -144,7 +171,7 @@ setInterval(function() {
   var currentTime = player.getCurrentTime();
   var progress = 0;
 
-  if(totalTime != 0)
+  if (totalTime != 0)
     progress = (currentTime / totalTime) * 100;
 
   $('.player').attr('value', progress);
