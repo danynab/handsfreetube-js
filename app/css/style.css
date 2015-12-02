@@ -26,9 +26,11 @@ body {
 }
 .sidemenu .bg {
   background-color: black;
-  height: 110%;
-  width: 100%;
-  position: absolute;
+  width: 350px;
+  top:0;
+  pointer-events: none;
+  bottom:0;
+  position: fixed;
 }
 .sidemenu h3 {
   color: white;
