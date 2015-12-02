@@ -137,14 +137,18 @@ var recognition = new webkitSpeechRecognition();
 recognition.continuous = false;
 recognition.interimResults = true;
 recognition.onresult = function(event) {
-  var result = event.results[event.results.length -1];
+  var result = event.results[event.results.length - 1];
   //console.log('confidence: ' + result[0].confidence + ' - transcript: ' + result[0].transcript + ' - isFinal: ' + result.isFinal)
+  var transcript = result[0].transcript;
+  $('.search input').val(transcript);
   if (result.isFinal) {
-    var transcript = result[0].transcript;
     console.log(transcript);
     searchPlaylists(transcript);
-    annyang.start();
   }
+}
+recognition.onend = function() {
+  $('.search').removeClass('recording');
+  annyang.start();
 }
 
 if (annyang) {
@@ -163,6 +167,9 @@ if (annyang) {
 function search() {
   annyang.abort();
   recognition.start();
+  openSearchPanel();
+  $('.search').addClass('recording');
+  $('.search input').val('');
   console.log("Looking for...");
 }
 

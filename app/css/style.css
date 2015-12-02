@@ -12,6 +12,63 @@ body {
   opacity: 0.8;
   z-index: -1;
 }
+.search {
+  height: 3.5em;
+  width: 350px;
+  right: -295px;
+  top: 0;
+  position: absolute;
+  z-index: 98;
+  transition: .5s ease-in-out;
+  overflow: scroll;
+}
+.search input {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  width: 250px;
+  border: none;
+  border-bottom: 2px solid white;
+  -webkit-appearance: none;
+  background: none;
+  color: white;
+  position: absolute;
+  top:1em;
+  outline: none;
+  left: 60px;
+}
+.search i.fa-search {
+  position: absolute;
+  left: 10px;
+  top:0.8em;
+}
+.search i.fa-circle {
+  transition: .5s ease-in-out;
+  opacity: 0;
+  position: absolute;
+  right: 10px;
+  font-size: 1em;
+  color: red;
+  top:1.5em;
+}
+.search.recording i.fa-circle {
+  opacity: 1;
+}
+.search .bg {
+  background-color: black;
+  width: 350px;
+  left: 80px;
+  height: 3.5em;
+  pointer-events: none;
+  transition: .5s ease-in-out;
+  position: fixed;
+}
+.search.open {
+  right: 0;
+}
+.search.open .bg {
+  left:0;
+}
+
 .sidemenu {
   height: 100%;
   width: 350px;
@@ -27,9 +84,9 @@ body {
 .sidemenu .bg {
   background-color: black;
   width: 350px;
-  top:0;
+  top: 0;
   pointer-events: none;
-  bottom:0;
+  bottom: 0;
   position: fixed;
 }
 .sidemenu h3 {
@@ -94,6 +151,9 @@ body {
 .blur {
   -webkit-filter: blur(5px);
 }
+.blur:not(.content) {
+  pointer-events: none;
+}
 .content {
   transition: .5s ease-in-out;
   position: absolute;
@@ -149,17 +209,14 @@ body {
   border-radius: 9px;
   background-size: 35px 20px, 100% 100%, 100% 100%;
 }
-
 .footer .backward {
   position: absolute;
   left: 10px;
 }
-
 .footer .play {
   position: absolute;
   left: 55px;
 }
-
 .footer .forward {
   position: absolute;
   left: 100px;
@@ -223,10 +280,11 @@ body {
   text-shadow: -1px 0 5px #333, 0 1px 5px #333, 1px 0 5px #333, 0 -1px 5px #333;
 }
 .right-icons .options {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  transition: .5s ease-in-out;
   text-align: center;
-}
-.right-icons i.fa-microphone {
-  right: 2px;
 }
 .right-icons .options i:hover {
   text-shadow: -1px 0 5px white, 0 1px 5px white, 1px 0 5px white, 0 -1px 5px white;
@@ -246,13 +304,12 @@ body {
   left: 0;
   bottom: 0;
   right: 0;
+  pointer-events: none;
 }
-
 .video iframe {
   width: 100%;
   height: 100%;
 }
-
 .playlist-item {
   color: white;
 }
