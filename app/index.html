@@ -22,13 +22,13 @@
   </div>
   <div class="content">
     <h1>Title</h1>
-    <video autoplay="true">
-      <source src="http://156.35.95.67/movify/static/trailers/9VdWVDXhSgG4c5NRpaBrzWgm.mp4" type="video/mp4">
-    </video>
+    <div id="video"></div>
     <div class="footer">
       <div class="bg"></div>
       <div class="controls">
+        <i class="fa fa-backward backward"></i>
         <i class="fa fa-play play"></i>
+        <i class="fa fa-forward forward"></i>
         <div class="progress-player">
           <progress class="player" value="50" max="100"></progress>
         </div>
@@ -61,7 +61,10 @@
   <script>
     window.$ = window.jQuery = require('./js/jquery.min.js');
   </script>
+  <script src="js/gest.min.js" type="text/javascript"></script>
+  <script src="js/annyang.min.js" type="text/javascript"></script>
   <script src="js/script.js"></script>
+  <script src="js/actionsOnPlayer.js"></script>
 </body>
 
 </html>
