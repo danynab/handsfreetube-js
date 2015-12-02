@@ -1,5 +1,5 @@
 {
-  "name": "YouPlayer",
+  "name": "HandsfreeTube",
   "version": "1.0.0",
   "description": "A music player supported by gestures and voice actions.",
   "main": "main.js",
@@ -8,20 +8,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/atom/electron-quick-start.git"
+    "url": "git+https://github.com/danynab/handsfreetube-js.git"
   },
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial"
+    "youtube",
+    "player",
+    "gestures",
+    "voice",
+    "interaction"
   ],
   "author": "GitHub",
   "license": "CC0-1.0",
   "bugs": {
-    "url": "https://github.com/atom/electron-quick-start/issues"
+    "url": "https://github.com/danynab/handsfreetube-js/issues"
   },
-  "homepage": "https://github.com/atom/electron-quick-start#readme",
+  "homepage": "https://github.com/danynab/handsfreetube-js#readme",
   "devDependencies": {
     "electron-prebuilt": "^0.35.0"
   }
