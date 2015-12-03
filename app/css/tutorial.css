@@ -1,0 +1,16 @@
+html {
+  font-family: 'Open Sans', sans-serif;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background-color: #2196F3;
+
+}
+
+header {
+  background-color: white;
+  margin: 20px;
+}

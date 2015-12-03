@@ -23,7 +23,7 @@ function searchPlaylists(query) {
 }
 
 function requestNameVideo(id, callback) {
-  var url = 'https://www.googleapis.com/youtube/v3/videos?part=snippet&id=' + id + '&key=' + key;
+  var url = baseUrl + '/videos?part=snippet&id=' + id + '&key=' + key;
   $.get(url, function(data) {
     if (data.hasOwnProperty('items')) {
       var video = data.items[0];

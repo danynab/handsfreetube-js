@@ -66,24 +66,32 @@ function onPlayerStateChange(event) {
   changeTitle();
   fillPlaylist();
   setCurrentVolume();
+  if (event.data == YT.PlayerState.PLAYING) {
+    $('.play').addClass('fa-pause');
+    $('.play').removeClass('fa-play');
+  } else {
+    $('.play').addClass('fa-play');
+    $('.play').removeClass('fa-pause');
+  }
   if (event.data == YT.PlayerState.PLAYING && !done) {
     //setTimeout(stopVideo, 6000);
     done = true;
   }
+
 }
 
 function stopVideo() {
   player.pauseVideo();
-  $('.play').toggleClass('fa-play', true);
-  $('.play').toggleClass('fa-pause', false);
+  //$('.play').toggleClass('fa-play', true);
+  //$('.play').toggleClass('fa-pause', false);
 }
 
 function playVideo() {
   player.playVideo();
-  $('.play').toggleClass('fa-play', false);
-  $('.play').toggleClass('fa-pause', true);
-  changeTitle();
-  fillPlaylist();
+  //$('.play').toggleClass('fa-play', false);
+  //$('.play').toggleClass('fa-pause', true);
+  //changeTitle();
+  //fillPlaylist();
 }
 
 function nextVideo() {
@@ -167,6 +175,8 @@ function fillPlay() {
 
 var recognition = new webkitSpeechRecognition();
 recognition.continuous = false;
+//recognition.lang = "en-GB";
+recognition.lang = "es-ES";
 recognition.interimResults = true;
 recognition.onresult = function(event) {
   var result = event.results[event.results.length - 1];
@@ -184,13 +194,24 @@ recognition.onend = function() {
 }
 
 if (annyang) {
-  var commands = {
-    'play': playVideo,
-    'stop': stopVideo,
-    'playlist': showPlaylist,
-    'look for': search,
-    'number *param': selectNumber
-  };
+  var commands;
+  if (recognition.lang == 'es-ES') {
+    commands = {
+      'reproducir': playVideo,
+      'parar': stopVideo,
+      'playlist': showPlaylist,
+      'buscar': search,
+      'numero *param': selectNumber
+    };
+  } else {
+    commands = {
+      'play': playVideo,
+      'stop': stopVideo,
+      'playlist': showPlaylist,
+      'look for': search,
+      'number *param': selectNumber
+    };
+  }
 
   annyang.addCommands(commands);
 
@@ -199,16 +220,30 @@ if (annyang) {
 
 function selectNumber(param) {
   console.log(param);
-  if (param = 'one') {
-    param = 1;
-  } else if (param == 'two') {
-    param = 2;
-  } else if (param == 'three') {
-    param = 3;
-  } else if (param.substring(0, 2) == 'fo') {
-    param = 4;
-  } else if (param.substring(0, 2) == 'fi') {
-    param = 5;
+  if (recognition.lang == 'es-ES') {
+    if (param.indexOf('un') > -1) {
+      param = 1;
+    } else if (param.indexOf('do') > -1) {
+      param = 2;
+    } else if (param.indexOf('tres') > -1) {
+      param = 3;
+    } else if (param.indexOf('cua') > -1) {
+      param = 4;
+    } else if (param.indexOf('cin') > -1) {
+      param = 5;
+    }
+  } else {
+    if (param.indexOf('one') > -1) {
+      param = 1;
+    } else if (param.indexOf('two') > -1) {
+      param = 2;
+    } else if (param.indexOf('three') > -1) {
+      param = 3;
+    } else if (param.indexOf('fo') > -1) {
+      param = 4;
+    } else if (param.indexOf('fi') > -1) {
+      param = 5;
+    }
   }
   var id = $('.search-result[data-number="' + param + '"]').data('id');
   console.log(param + ' - ' + id);
