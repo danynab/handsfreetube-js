@@ -82,11 +82,15 @@ body {
   top: 4em;
 }
 .search-result {
+  cursor: pointer;
   width: 320px;
   height: 200px;
   position: relative;
   display: block;
   margin: 10px auto;
+}
+.search-result:hover {
+  border: 2px solid white;
 }
 .search-result img {
   width: 100%;

@@ -18,7 +18,7 @@ function right() {
   previousVideo();
 }
 
-//gest.start();
+gest.start();
 gest.options.sensitivity(80);
 
 gest.options.subscribeWithCallback(function(gesture) {
@@ -63,6 +63,9 @@ function onPlayerReady(event) {
 var done = false;
 
 function onPlayerStateChange(event) {
+  changeTitle();
+  fillPlaylist();
+  setCurrentVolume();
   if (event.data == YT.PlayerState.PLAYING && !done) {
     //setTimeout(stopVideo, 6000);
     done = true;
@@ -121,7 +124,7 @@ function setCurrentVolume() {
 }
 
 function fillPlaylist() {
-  $('.sidemenu').find('ul').remove();
+  /*$('.sidemenu').find('ul').remove();
 
   // Fill playlist menu
   var list = "<ul>"
@@ -130,7 +133,36 @@ function fillPlaylist() {
   });
   list += "</ul>"
 
-  $('.sidemenu').append(list);
+  $('.sidemenu').append(list);*/
+  iterar(0, player.getPlaylist());
+}
+
+function iterar(i, videos) {
+  if (i < videos.length - 1) {
+    requestNameVideo(videos[i], function(name) {
+      videosNames.push(name);
+      iterar(i + 1, videos);
+    });
+  } else {
+    requestNameVideo(videos[i], function(name) {
+      videosNames.push(name);
+      fillPlay();
+    });
+  }
+}
+var videosNames = [];
+
+function fillPlay() {
+  $('.sidemenu ul').html('');
+
+  // Fill playlist menu
+  var list = ''
+  videosNames.forEach(function(name) {
+    list += "<li class='playlist-item'>" + name + "</li>";
+  });
+  videosNames = [];
+
+  $('.sidemenu ul').html(list);
 }
 
 var recognition = new webkitSpeechRecognition();
@@ -156,12 +188,37 @@ if (annyang) {
     'play': playVideo,
     'stop': stopVideo,
     'playlist': showPlaylist,
-    'look for': search
+    'look for': search,
+    'number *param': selectNumber
   };
 
   annyang.addCommands(commands);
 
   annyang.start();
+}
+
+function selectNumber(param) {
+  console.log(param);
+  if (param = 'one') {
+    param = 1;
+  } else if (param == 'two') {
+    param = 2;
+  } else if (param == 'three') {
+    param = 3;
+  } else if (param.substring(0, 2) == 'fo') {
+    param = 4;
+  } else if (param.substring(0, 2) == 'fi') {
+    param = 5;
+  }
+  var id = $('.search-result[data-number="' + param + '"]').data('id');
+  console.log(param + ' - ' + id);
+  if (id != undefined) {
+    player.loadPlaylist({
+      list: id,
+      listType: 'playlist'
+    });
+    closeSearchPanel();
+  }
 }
 
 function search() {
