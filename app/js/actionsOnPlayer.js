@@ -221,15 +221,15 @@ if (annyang) {
 function selectNumber(param) {
   console.log(param);
   if (recognition.lang == 'es-ES') {
-    if (param.indexOf('un') > -1) {
+    if (param.toLowerCase().indexOf('un') > -1) {
       param = 1;
-    } else if (param.indexOf('do') > -1) {
+    } else if (param.toLowerCase().indexOf('do') > -1) {
       param = 2;
-    } else if (param.indexOf('tres') > -1) {
+    } else if (param.toLowerCase().indexOf('tres') > -1) {
       param = 3;
-    } else if (param.indexOf('cua') > -1) {
+    } else if (param.toLowerCase().indexOf('cua') > -1) {
       param = 4;
-    } else if (param.indexOf('cin') > -1) {
+    } else if (param.toLowerCase().indexOf('cin') > -1) {
       param = 5;
     }
   } else {

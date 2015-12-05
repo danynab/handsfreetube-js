@@ -28,7 +28,7 @@ app.on('ready', function() {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL('file://' + __dirname + '/app/player.html');
+  mainWindow.loadURL('file://' + __dirname + '/app/index.html');
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();

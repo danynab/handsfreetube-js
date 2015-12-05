@@ -4,14 +4,78 @@
 <head>
   <meta charset="utf-8">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/normalize.css" />
   <link rel="stylesheet" href="css/tutorial.css" />
   <link rel="stylesheet" href="css/font-awesome.css" />
+  <link rel="stylesheet" href="css/animate.css" />
   <title>HandsfreeTube</title>
 </head>
 
 <body>
-  <header>
+  <header class="animated fadeInUpBig">
+    <img src="images/logo.png" />
+    <h1>HandsfreeTube</h1>
   </header>
+
+  <main class="animated fadeInUpBig">
+    <h2>How to use it.</h2>
+    <div class="step step-0">
+      <p>You can change videos with your hands.</p>
+      <p>Try it! Move your hand to both sides.</p>
+      <div class="tutorial-image">
+        <i class="fa fa-arrow-left left"></i>
+        <img src="images/high-five.png" />
+        <i class="fa fa-arrow-right right"></i>
+      </div>
+    </div>
+    <div class="step step-1 right">
+      <p>Also, you can change the volume with your hands.</p>
+      <p>Try it! Move your hand up and down.</p>
+      <div class="tutorial-image">
+        <i class="fa fa-arrow-up up"></i>
+        <img src="images/high-five.png" />
+        <i class="fa fa-arrow-down down"></i>
+      </div>
+    </div>
+    <div class="step step-2 right">
+      <p>And finally, the voice is very important too.</p>
+      <p>Next are described the avaliable voice commands.</p>
+      <p>Try them! Say the commands.</p>
+      <table class="commands">
+        <tbody>
+          <tr>
+            <td class="command lookfor">look for</td>
+            <td class="description">Look for a playlist.</td>
+            <td class="command playlist">playlist</td>
+            <td class="description">Show the playlist.</td>
+          </tr>
+          <tr>
+            <td class="command play">play</td>
+            <td class="description">Start the video.</td>
+            <td class="command stop">stop</td>
+            <td class="description">Stop the video.</td>
+          </tr>
+          <tr>
+            <td class="command number">number X</td>
+            <td class="description">Select the option X.</td>
+            <td class="command help">help</td>
+            <td class="description">Show help menu.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer class="animated fadeInUpBig">
+    <div class="steps">
+      <ul>
+        <li class="active circle" data-item="0"><i class="fa fa-circle"></i></li>
+        <li class="circle" data-item="1"><i class="fa fa-circle"></i></li>
+        <li class="circle" data-item="2"><i class="fa fa-circle"></i></li>
+      </ul>
+    </div>
+    <a class="skip" href="#">Skip tutorial <i class="fa fa-arrow-right"></i></a>
+  </footer>
 
   <script>
     window.$ = window.jQuery = require('./js/jquery.min.js');
