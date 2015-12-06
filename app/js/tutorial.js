@@ -162,9 +162,9 @@ function left() {
   console.log("left");
   switch (tutorialStep) {
     case 0:
-      if (!$("i.right").hasClass("correct")) {
-        $("i.right").addClass("correct");
-        if ($("i.left").hasClass("correct")) {
+      if (!$("i.left").hasClass("correct")) {
+        $("i.left").addClass("correct");
+        if ($("i.right").hasClass("correct")) {
           completedSteps = completedSteps + 1;
           nextStep(tutorialStep + 1);
         }
@@ -177,9 +177,9 @@ function right() {
   console.log("right");
   switch (tutorialStep) {
     case 0:
-      if (!$("i.left").hasClass("correct")) {
-        $("i.left").addClass("correct");
-        if ($("i.right").hasClass("correct")) {
+      if (!$("i.right").hasClass("correct")) {
+        $("i.right").addClass("correct");
+        if ($("i.left").hasClass("correct")) {
           completedSteps = completedSteps + 1;
           nextStep(tutorialStep + 1);
         }
