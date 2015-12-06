@@ -58,6 +58,25 @@ $(document).ready(function() {
     searchPlaylists(query);
   });
 
+  $('.fa-microphone').on('click', function() {
+    if($('.fa-microphone').hasClass('active'))
+      annyang.abort();
+    else
+      annyang.start();
+    $('.fa-microphone').toggleClass('active');
+  });
+
+  $('.fa-hand-paper-o').on('click', function() {
+    if($('.fa-hand-paper-o').hasClass('active')) {
+      gest.stop();
+      stopWebcam();
+    }
+    else {
+      gest.start();
+      startWebcam();
+    }
+    $('.fa-hand-paper-o').toggleClass('active');
+  });
 });
 
 function openSearchPanel() {
@@ -122,3 +141,41 @@ function onPlaylistsSearchResults(playlists) {
   $('.search.open').addClass('expand');
   console.log(playlists);
 }
+var video = document.querySelector("#myVideo");
+var videoStream;
+
+function startWebcam() {
+  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+
+  if (navigator.getUserMedia) {
+      navigator.getUserMedia({video: true}, handleVideo, videoError);
+  }
+
+  function handleVideo(stream) {
+      video.src = window.URL.createObjectURL(stream);
+      videoStream = stream;
+  }
+
+  function videoError(e) {
+
+  }
+
+}
+
+function stopWebcam() {
+  videoStream.stop();
+}
+
+startWebcam();
+var colors = new tracking.ColorTracker(['cyan']);
+
+  colors.on('track', function(event) {
+    if (event.data.length === 0) {
+      // No colors were detected in this frame.
+    } else {
+      event.data.forEach(function(rect) {
+        player.stopVideo();
+      });
+    }
+  });
+tracking.track('#myVideo', colors);

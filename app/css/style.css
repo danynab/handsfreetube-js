@@ -355,3 +355,7 @@ body {
 .playlist-item {
   color: white;
 }
+
+#myVideo {
+  visibility: hidden;
+}
