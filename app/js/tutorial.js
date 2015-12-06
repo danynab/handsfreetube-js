@@ -1,9 +1,13 @@
 var tutorialStep = 0;
-var steps = 3;
+var steps = 4;
 //var language = 'es-ES';
 var completedSteps = 0;
 var language = "en-GB";
 
+var lastLeft = new Date().getTime();
+var lastRigth = new Date().getTime();
+var gestureTimeout;
+var gestureDelay = 300;
 
 $(document).ready(function() {
   $("a.skip").click(goToPlayer);
@@ -12,10 +16,25 @@ $(document).ready(function() {
   gest.options.sensitivity(80);
 
   gest.options.subscribeWithCallback(function(gesture) {
-    if (gesture.up) up();
-    else if (gesture.down) down();
-    else if (gesture.left) left();
-    else if (gesture.right) right();
+    if (gesture.up) {
+      performGesture(up);
+    } else if (gesture.down) {
+      performGesture(down);
+    } else if (gesture.left) {
+      lastLeft = new Date().getTime();
+      if ((lastLeft - lastRigth) < gestureDelay) {
+        performGesture(rightLeft);
+      } else {
+        performGesture(left);
+      }
+    } else if (gesture.right) {
+      lastRigth = new Date().getTime();
+      if ((lastRigth - lastLeft) < gestureDelay) {
+        performGesture(leftRight);
+      } else {
+        performGesture(right);
+      }
+    }
   });
 
   $(".circle").click(function() {
@@ -85,10 +104,8 @@ $(document).ready(function() {
     }
 
     annyang.addCommands(commands);
-
     annyang.start();
   }
-
 });
 
 function goToPlayer() {
@@ -122,8 +139,8 @@ function up() {
           completedSteps = completedSteps + 1;
           nextStep(tutorialStep + 1);
         }
-        break;
       }
+      break;
   }
 }
 
@@ -136,12 +153,13 @@ function down() {
           completedSteps = completedSteps + 1;
           nextStep(tutorialStep + 1);
         }
-        break;
       }
+      break;
   }
 }
 
 function left() {
+  console.log("left");
   switch (tutorialStep) {
     case 0:
       if (!$("i.right").hasClass("correct")) {
@@ -150,12 +168,13 @@ function left() {
           completedSteps = completedSteps + 1;
           nextStep(tutorialStep + 1);
         }
-        break;
       }
+      break;
   }
 }
 
 function right() {
+  console.log("right");
   switch (tutorialStep) {
     case 0:
       if (!$("i.left").hasClass("correct")) {
@@ -164,9 +183,44 @@ function right() {
           completedSteps = completedSteps + 1;
           nextStep(tutorialStep + 1);
         }
-        break;
       }
+      break;
   }
+}
+
+function leftRight() {
+  console.log("left - right");
+  switch (tutorialStep) {
+    case 3:
+      if (!$(".left-right i").hasClass("correct")) {
+        $(".left-right i").addClass("correct");
+        if ($(".right-left i").hasClass("correct")) {
+          completedSteps = completedSteps + 1;
+          nextStep(tutorialStep + 1);
+        }
+      }
+      break;
+  }
+}
+
+function rightLeft() {
+  console.log("right - left");
+  switch (tutorialStep) {
+    case 3:
+      if (!$(".right-left i").hasClass("correct")) {
+        $(".right-left i").addClass("correct");
+        if ($(".left-right i").hasClass("correct")) {
+          completedSteps = completedSteps + 1;
+          nextStep(tutorialStep + 1);
+        }
+      }
+      break;
+  }
+}
+
+function performGesture(gesture) {
+  clearTimeout(gestureTimeout);
+  gestureTimeout = setTimeout(gesture, gestureDelay);
 }
 
 function nextStep(step) {
