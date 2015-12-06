@@ -357,6 +357,8 @@ body {
 }
 #myVideo {
   visibility: hidden;
+  position: absolute;
+  z-index: -99;
 }
 
 .speak-dialog {

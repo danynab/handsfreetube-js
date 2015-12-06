@@ -1,61 +1,3 @@
-function up() {
-  volumeUp();
-}
-
-function down() {
-  volumeDown();
-}
-
-function left() {
-  nextVideo();
-}
-
-function right() {
-  previousVideo();
-}
-
-function leftRight() {
-  showSpeakDialog();
-}
-
-function rightLeft() {
-  showSpeakDialog();
-}
-
-var lastLeft = new Date().getTime();
-var lastRigth = new Date().getTime();
-var gestureTimeout;
-var gestureDelay = 300;
-
-gest.start();
-gest.options.sensitivity(80);
-
-gest.options.subscribeWithCallback(function(gesture) {
-  if (gesture.up) {
-    performGesture(up);
-  } else if (gesture.down) {
-    performGesture(down);
-  } else if (gesture.left) {
-    lastLeft = new Date().getTime();
-    if ((lastLeft - lastRigth) < gestureDelay) {
-      performGesture(rightLeft);
-    } else {
-      performGesture(left);
-    }
-  } else if (gesture.right) {
-    lastRigth = new Date().getTime();
-    if ((lastRigth - lastLeft) < gestureDelay) {
-      performGesture(leftRight);
-    } else {
-      performGesture(right);
-    }
-  }
-});
-
-function performGesture(gesture) {
-  clearTimeout(gestureTimeout);
-  gestureTimeout = setTimeout(gesture, gestureDelay);
-}
 
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
@@ -202,51 +144,6 @@ function fillPlay() {
   $('.sidemenu ul').html(list);
 }
 
-var recognition = new webkitSpeechRecognition();
-recognition.continuous = false;
-//recognition.lang = "en-GB";
-recognition.lang = "es-ES";
-recognition.interimResults = true;
-recognition.onresult = function(event) {
-  var result = event.results[event.results.length - 1];
-  //console.log('confidence: ' + result[0].confidence + ' - transcript: ' + result[0].transcript + ' - isFinal: ' + result.isFinal)
-  var transcript = result[0].transcript;
-  $('.search input').val(transcript);
-  if (result.isFinal) {
-    console.log(transcript);
-    searchPlaylists(transcript);
-  }
-}
-recognition.onend = function() {
-  $('.search').removeClass('recording');
-  annyang.start();
-}
-
-if (annyang) {
-  var commands;
-  if (recognition.lang == 'es-ES') {
-    commands = {
-      'reproducir': playVideo,
-      'parar': stopVideo,
-      'playlist': showPlaylist,
-      'buscar': search,
-      'numero *param': selectNumber
-    };
-  } else {
-    commands = {
-      'play': playVideo,
-      'stop': stopVideo,
-      'playlist': showPlaylist,
-      'look for': search,
-      'number *param': selectNumber
-    };
-  }
-
-  annyang.addCommands(commands);
-
-  annyang.start();
-}
-
 function selectNumber(param) {
   console.log(param);
   if (recognition.lang == 'es-ES') {
@@ -285,16 +182,6 @@ function selectNumber(param) {
   }
 }
 
-function search() {
-  annyang.abort();
-  recognition.start();
-  openSearchPanel();
-  $('.search.open').removeClass('expand');
-  $('.search').addClass('recording');
-  $('.search input').val('');
-  console.log("Looking for...");
-}
-
 setInterval(function() {
   var totalTime = player.getDuration();
   var currentTime = player.getCurrentTime();
@@ -304,6 +191,4 @@ setInterval(function() {
     progress = (currentTime / totalTime) * 100;
 
   $('.player').attr('value', progress);
-
-
 }, 1000)

@@ -20,7 +20,6 @@ $(document).ready(function() {
   $('body').on('click', '.blur', function() {
     closeSidebar();
     closeSearchPanel();
-    hideSpeakDialog();
   });
 
   $('.play').on('click', function() {
@@ -59,13 +58,7 @@ $(document).ready(function() {
     searchPlaylists(query);
   });
 
-  $('.fa-microphone').on('click', function() {
-    if($('.fa-microphone').hasClass('active'))
-      annyang.abort();
-    else
-      annyang.start();
-    $('.fa-microphone').toggleClass('active');
-  });
+  $('.fa-microphone').on('click', toogleVoiceCommands);
 
   $('.fa-hand-paper-o').on('click', function() {
     if($('.fa-hand-paper-o').hasClass('active')) {
@@ -79,6 +72,14 @@ $(document).ready(function() {
     $('.fa-hand-paper-o').toggleClass('active');
   });
 });
+
+function toogleVoiceCommands() {
+  if($('.fa-microphone').hasClass('active'))
+    annyang.abort();
+  else
+    annyang.start();
+  $('.fa-microphone').toggleClass('active');
+}
 
 function showSpeakDialog() {
   $(".speak-dialog").addClass("show");
