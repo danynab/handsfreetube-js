@@ -20,6 +20,7 @@ $(document).ready(function() {
   $('body').on('click', '.blur', function() {
     closeSidebar();
     closeSearchPanel();
+    hideSpeakDialog();
   });
 
   $('.play').on('click', function() {
@@ -78,6 +79,19 @@ $(document).ready(function() {
     $('.fa-hand-paper-o').toggleClass('active');
   });
 });
+
+function showSpeakDialog() {
+  $(".speak-dialog").addClass("show");
+  $('.content').addClass('blur');
+  $('.right-icons').addClass('blur');
+  player.pauseVideo();
+}
+
+function hideSpeakDialog(){
+  $('.content').removeClass('blur');
+  $('.right-icons').removeClass('blur');
+  $(".speak-dialog").removeClass("show");
+}
 
 function openSearchPanel() {
   $('.search-form input').val('');

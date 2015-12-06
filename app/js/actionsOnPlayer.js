@@ -1,7 +1,3 @@
-$(document).ready(function() {
-
-});
-
 function up() {
   volumeUp();
 }
@@ -18,15 +14,48 @@ function right() {
   previousVideo();
 }
 
+function leftRight() {
+  showSpeakDialog();
+}
+
+function rightLeft() {
+  showSpeakDialog();
+}
+
+var lastLeft = new Date().getTime();
+var lastRigth = new Date().getTime();
+var gestureTimeout;
+var gestureDelay = 300;
+
 gest.start();
 gest.options.sensitivity(80);
 
 gest.options.subscribeWithCallback(function(gesture) {
-  if (gesture.up) up();
-  else if (gesture.down) down();
-  else if (gesture.left) left();
-  else if (gesture.right) right();
+  if (gesture.up) {
+    performGesture(up);
+  } else if (gesture.down) {
+    performGesture(down);
+  } else if (gesture.left) {
+    lastLeft = new Date().getTime();
+    if ((lastLeft - lastRigth) < gestureDelay) {
+      performGesture(rightLeft);
+    } else {
+      performGesture(left);
+    }
+  } else if (gesture.right) {
+    lastRigth = new Date().getTime();
+    if ((lastRigth - lastLeft) < gestureDelay) {
+      performGesture(leftRight);
+    } else {
+      performGesture(right);
+    }
+  }
 });
+
+function performGesture(gesture) {
+  clearTimeout(gestureTimeout);
+  gestureTimeout = setTimeout(gesture, gestureDelay);
+}
 
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
