@@ -107,7 +107,8 @@ function goToPlayer() {
   $("footer").addClass("fadeOutDownBig");
   $("body").addClass("hide");
   setTimeout(function() {
-    window.location.href = "player_es.html";
+    var playerUrl = $('a.skip').attr('href');
+    window.location.href = playerUrl;
   }, 500);
 }
 
