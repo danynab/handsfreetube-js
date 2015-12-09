@@ -5,7 +5,7 @@ var completedSteps = 0;
 var lastLeft = new Date().getTime();
 var lastRigth = new Date().getTime();
 var gestureTimeout;
-var gestureDelay = 300;
+var gestureDelay = 500;
 
 var lang;
 
