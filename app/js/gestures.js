@@ -4,6 +4,7 @@ var CONTEXT_RESULTS = 2;
 var CONTEXT_PLAYLIST = 3;
 var CONTEXT_COMMAND = 4;
 var CONTEXT_HELP = 5;
+var CONTEXT_WELCOME = 6;
 
 var lastLeft = new Date().getTime();
 var lastRigth = new Date().getTime();
@@ -142,6 +143,8 @@ function checkContext() {
     }
   } else if ($('.sidemenu').hasClass('open')) {
     return CONTEXT_PLAYLIST;
+  } else if (!$('.welcome').hasClass('removed')) {
+    return CONTEXT_WELCOME;
   } else {
     return CONTEXT_PLAYER;
   }

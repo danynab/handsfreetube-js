@@ -1,8 +1,6 @@
 var tutorialStep = 0;
 var steps = 4;
-//var language = 'es-ES';
 var completedSteps = 0;
-var language = "en-GB";
 
 var lastLeft = new Date().getTime();
 var lastRigth = new Date().getTime();
@@ -46,61 +44,56 @@ $(document).ready(function() {
   });
 
   if (annyang) {
-    var commands;
-    if (language == "es-ES") {
-      commands = {
-        "reproducir": function() {
-          $(".command.play").addClass("correct");
-          checkCommands();
-        },
-        "parar": function() {
-          $(".command.stop").addClass("correct");
-          checkCommands();
-        },
-        "playlist": function() {
-          $(".command.playlist").addClass("correct");
-          checkCommands();
-        },
-        "buscar": function() {
-          $(".command.lookfor").addClass("correct");
-          checkCommands();
-        },
-        "numero *param": function() {
-          $(".command.number").addClass("correct");
-          checkCommands();
-        },
-        "ayuda": function() {
-          $(".command.help").addClass("correct");
-          checkCommands();
-        }
-      };
-    } else {
-      commands = {
-        "play": function() {
-          $(".command.play").addClass("correct");
-          checkCommands();
-        },
-        "stop": function() {
-          $(".command.stop").addClass("correct");
-          checkCommands();
-        },
-        "playlist": function() {
-          $(".command.playlist").addClass("correct");
-          checkCommands();
-        },
-        "look for": function() {
-          $(".command.lookfor").addClass("correct");
-          checkCommands();
-        },
-        "number *param": function() {
-          $(".command.number").addClass("correct");
-          checkCommands();
-        },
-        "help": function() {
-          $(".command.help").addClass("correct");
-          checkCommands();
-        }
-      };
+    var commands = {
+      "reproducir": function() {
+        $(".command.play").addClass("correct");
+        checkCommands();
+      },
+      "parar": function() {
+        $(".command.stop").addClass("correct");
+        checkCommands();
+      },
+      "playlist": function() {
+        $(".command.playlist").addClass("correct");
+        checkCommands();
+      },
+      "buscar": function() {
+        $(".command.lookfor").addClass("correct");
+        checkCommands();
+      },
+      "numero *param": function() {
+        $(".command.number").addClass("correct");
+        checkCommands();
+      },
+      "ayuda": function() {
+        $(".command.help").addClass("correct");
+        checkCommands();
+      },
+      //English
+      "play": function() {
+        $(".command.play").addClass("correct");
+        checkCommands();
+      },
+      "stop": function() {
+        $(".command.stop").addClass("correct");
+        checkCommands();
+      },
+      "playlist": function() {
+        $(".command.playlist").addClass("correct");
+        checkCommands();
+      },
+      "look for": function() {
+        $(".command.lookfor").addClass("correct");
+        checkCommands();
+      },
+      "number *param": function() {
+        $(".command.number").addClass("correct");
+        checkCommands();
+      },
+      "help": function() {
+        $(".command.help").addClass("correct");
+        checkCommands();
+      }
     }
 
     annyang.addCommands(commands);

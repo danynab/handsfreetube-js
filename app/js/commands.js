@@ -1,6 +1,6 @@
 var recognition;
-var language = "en-GB";
-//var language = "es-ES";
+//var language = "en-GB";
+var language = "es-ES";
 
 $(document).ready(function() {
   recognition = new webkitSpeechRecognition();
@@ -22,49 +22,45 @@ $(document).ready(function() {
   }
 
   if (annyang) {
-    var commands;
-    if (recognition.lang == 'es-ES') {
-      commands = {
-        'reproducir': function() {
-          invokeCommand(playVideo);
-        },
-        'parar': function() {
-          invokeCommand(stopVideo);
-        },
-        'playlist': function() {
-          invokeCommand(showPlaylist);
-        },
-        'buscar': function() {
-          invokeCommand(search);
-        },
-        'numero *param': function() {
-          invokeCommand(selectNumber);
-        },
-        'ayuda': function () {
-          invokeCommand(showHelpPanel);
-        }
-      };
-    } else {
-      commands = {
-        'play': function() {
-          invokeCommand(playVideo);
-        },
-        'stop': function() {
-          invokeCommand(stopVideo);
-        },
-        'playlist': function() {
-          invokeCommand(showPlaylist);
-        },
-        'look for': function() {
-          invokeCommand(search);
-        },
-        'number *param': function(param) {
-          invokeCommand(selectNumber, param);
-        },
-        'help': function() {
-          invokeCommand(showHelpPanel);
-        }
-      };
+    var commands = {
+      //Spanish
+      'reproducir': function() {
+        invokeCommand(playVideo);
+      },
+      'parar': function() {
+        invokeCommand(stopVideo);
+      },
+      'playlist': function() {
+        invokeCommand(showPlaylist);
+      },
+      'buscar': function() {
+        invokeCommand(search);
+      },
+      'numero *param': function() {
+        invokeCommand(selectNumber);
+      },
+      'ayuda': function() {
+        invokeCommand(showHelpPanel);
+      },
+      // English
+      'play': function() {
+        invokeCommand(playVideo);
+      },
+      'stop': function() {
+        invokeCommand(stopVideo);
+      },
+      'playlist': function() {
+        invokeCommand(showPlaylist);
+      },
+      'look for': function() {
+        invokeCommand(search);
+      },
+      'number *param': function(param) {
+        invokeCommand(selectNumber, param);
+      },
+      'help': function() {
+        invokeCommand(showHelpPanel);
+      }
     }
 
     annyang.addCommands(commands);
