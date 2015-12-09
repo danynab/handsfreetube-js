@@ -32,6 +32,7 @@ $(document).ready(function() {
   });
 
   $('.welcome').click(function() {
+    closeSidebar();
     closeSearchPanel();
     hideSpeakDialog();
     hideHelpPanel();
