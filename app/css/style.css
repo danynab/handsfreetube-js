@@ -189,6 +189,9 @@ body {
   width: 0%;
   left: 50%;
 }
+h1, .video {
+  transition: .5s ease-in-out;
+}
 .blur {
   -webkit-filter: blur(5px);
 }
@@ -231,7 +234,7 @@ body {
 .footer .controls {
   position: relative;
   color: white;
-  bottom: -30px;
+  bottom: -20px;
 }
 .footer .controls progress[value] {
   -webkit-appearance: none;
@@ -313,7 +316,7 @@ body {
   z-index: 0;
 }
 .right-icons i {
-  z-index: 99;
+  z-index: 89;
   cursor: pointer;
   position: relative;
   font-size: 1.5em;
@@ -360,7 +363,6 @@ body {
   position: absolute;
   z-index: -99;
 }
-
 .speak-dialog {
   color: white;
   text-align: center;
@@ -373,11 +375,9 @@ body {
   transition: .5s ease-in-out;
   padding: 2em;
 }
-
 .speak-dialog.show {
   top: 100px;
 }
-
 .speak-dialog p {
   font-size: 1.5em;
   margin: 0;
@@ -387,4 +387,39 @@ body {
   margin-top: 20px;
   font-size: 3em;
   color: #F44336;
+}
+.help-panel {
+  z-index: 99;
+  color: white;
+  position: absolute;
+  bottom: -380px;
+  width: 100%;
+  height: 400px;
+  text-align: center;
+  transition: .5s ease-in-out;
+}
+.help-panel.show {
+  bottom: 0;
+}
+.help-panel .button {
+  cursor: pointer;
+  transition: .5s ease-in-out;
+}
+.help-panel .button:hover, .help-panel.show .button {
+  background-color: rgba(33, 150, 243, 0.5);
+}
+.help-panel .button i {
+  transition: .5s ease-in-out;
+}
+.help-panel.show .button i {
+  transform: rotate(-180deg);
+}
+.help-panel .button p {
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+}
+.help-content {
+  height: 100%;
+  background-color: rgba(33, 150, 243, 1);
 }

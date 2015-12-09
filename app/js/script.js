@@ -20,6 +20,8 @@ $(document).ready(function() {
   $('body').on('click', '.blur', function() {
     closeSidebar();
     closeSearchPanel();
+    hideSpeakDialog();
+    hideHelpPanel();
   });
 
   $('.play').on('click', function() {
@@ -61,51 +63,84 @@ $(document).ready(function() {
   $('.fa-microphone').on('click', toogleVoiceCommands);
 
   $('.fa-hand-paper-o').on('click', function() {
-    if($('.fa-hand-paper-o').hasClass('active')) {
+    if ($('.fa-hand-paper-o').hasClass('active')) {
       gest.stop();
       stopWebcam();
-    }
-    else {
+    } else {
       gest.start();
       startWebcam();
     }
     $('.fa-hand-paper-o').toggleClass('active');
   });
+
+  $('.help-panel .button').click(function() {
+    if ($('.help-panel').hasClass('show')) {
+      hideHelpPanel();
+    } else {
+      showHelpPanel();
+    }
+  });
 });
 
 function toogleVoiceCommands() {
-  if($('.fa-microphone').hasClass('active'))
+  if ($('.fa-microphone').hasClass('active'))
     annyang.abort();
   else
     annyang.start();
   $('.fa-microphone').toggleClass('active');
 }
 
+function hideHelpPanel() {
+  $('.help-panel').removeClass('show');
+  $('#nav-icon').removeClass('blur');
+  $('.content').removeClass('blur');
+  $('.footer').removeClass('blur');
+  $('.right-icons').removeClass('blur');
+}
+function showHelpPanel() {
+  $('.help-panel').addClass('show');
+  $('#nav-icon').addClass('blur');
+  $('.content').addClass('blur');
+  $('.footer').addClass('blur');
+  $('.right-icons').addClass('blur');
+}
+
 function showSpeakDialog() {
+  $('#nav-icon').addClass('blur');
   $(".speak-dialog").addClass("show");
   $('.content').addClass('blur');
+  $('.footer').addClass('blur');
+  $('.help-panel').addClass('blur');
   $('.right-icons').addClass('blur');
   player.pauseVideo();
 }
 
-function hideSpeakDialog(){
+function hideSpeakDialog() {
+  $('#nav-icon').removeClass('blur');
   $('.content').removeClass('blur');
+  $('.footer').removeClass('blur');
+  $('.help-panel').removeClass('blur');
   $('.right-icons').removeClass('blur');
   $(".speak-dialog").removeClass("show");
 }
 
 function openSearchPanel() {
+  $('#nav-icon').addClass('blur');
   $('.search-form input').val('');
   $('.search').addClass('open');
   $('.content').addClass('blur');
+  $('.footer').addClass('blur');
+  $('.help-panel').addClass('blur');
   $('.right-icons .options').addClass('blur');
   setTimeout(function() {
     $('.search-form input').focus();
   }, 500);
+  player.pauseVideo();
 }
 
 function closeSearchPanel() {
   if ($('.search').hasClass('open')) {
+    $('#nav-icon').removeClass('blur');
     $('.search').animate({
       scrollTop: 0
     }, 'slow');
@@ -115,6 +150,8 @@ function closeSearchPanel() {
         $('.search').removeClass('open');
         setTimeout(function() {
           $('.right-icons .options').removeClass('blur');
+          $('.footer').removeClass('blur');
+          $('.help-panel').removeClass('blur');
           $('.content').removeClass('blur');
         }, 500);
       }, 500);
@@ -127,6 +164,8 @@ function closeSidebar() {
     $('#nav-icon').removeClass('open');
     $('.sidemenu').removeClass('open');
     $('.content').removeClass('blur');
+    $('.footer').removeClass('blur');
+    $('.help-panel').removeClass('blur');
     $('.right-icons').removeClass('blur');
   }
 }
@@ -135,14 +174,18 @@ function openSidebar() {
   $('#nav-icon').addClass('open');
   $('.sidemenu').addClass('open');
   $('.content').addClass('blur');
+  $('.footer').addClass('blur');
+  $('.help-panel').addClass('blur');
   $('.right-icons').addClass('blur');
 }
 
 function showPlaylist() {
-  $('#nav-icon').toggleClass('open');
-  $('.sidemenu').toggleClass('open');
-  $('.content').toggleClass('blur');
-  $('.right-icons').toggleClass('blur');
+  $('#nav-icon').addClass('open');
+  $('.sidemenu').addClass('open');
+  $('.content').addClass('blur');
+  $('.footer').addClass('blur');
+  $('.help-panel').addClass('blur');
+  $('.right-icons').addClass('blur');
 }
 
 function onPlaylistsSearchResults(playlists) {
@@ -163,12 +206,14 @@ function startWebcam() {
   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
 
   if (navigator.getUserMedia) {
-      navigator.getUserMedia({video: true}, handleVideo, videoError);
+    navigator.getUserMedia({
+      video: true
+    }, handleVideo, videoError);
   }
 
   function handleVideo(stream) {
-      video.src = window.URL.createObjectURL(stream);
-      videoStream = stream;
+    video.src = window.URL.createObjectURL(stream);
+    videoStream = stream;
   }
 
   function videoError(e) {
@@ -184,13 +229,13 @@ function stopWebcam() {
 startWebcam();
 var colors = new tracking.ColorTracker(['cyan']);
 
-  colors.on('track', function(event) {
-    if (event.data.length === 0) {
-      // No colors were detected in this frame.
-    } else {
-      event.data.forEach(function(rect) {
-        player.stopVideo();
-      });
-    }
-  });
+colors.on('track', function(event) {
+  if (event.data.length === 0) {
+    // No colors were detected in this frame.
+  } else {
+    event.data.forEach(function(rect) {
+      player.stopVideo();
+    });
+  }
+});
 tracking.track('#myVideo', colors);

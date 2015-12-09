@@ -39,6 +39,9 @@ $(document).ready(function() {
         },
         'numero *param': function() {
           invokeCommand(selectNumber);
+        },
+        'ayuda': function () {
+          invokeCommand(showHelpPanel);
         }
       };
     } else {
@@ -57,6 +60,9 @@ $(document).ready(function() {
         },
         'number *param': function() {
           invokeCommand(selectNumber);
+        },
+        'help': function() {
+          invokeCommand(showHelpPanel);
         }
       };
     }

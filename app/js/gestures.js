@@ -2,6 +2,8 @@ var CONTEXT_PLAYER = 0;
 var CONTEXT_SEARCH = 1;
 var CONTEXT_RESULTS = 2;
 var CONTEXT_PLAYLIST = 3;
+var CONTEXT_COMMAND = 4;
+var CONTEXT_HELP = 5;
 
 var lastLeft = new Date().getTime();
 var lastRigth = new Date().getTime();
@@ -47,6 +49,9 @@ function up() {
     case CONTEXT_PLAYER:
       scrollContainer($(".sidemenu"), -scrollVariation);
       break;
+    case CONTEXT_COMMAND:
+      hideSpeakDialog();
+      break;
   }
 }
 
@@ -61,6 +66,12 @@ function down() {
     case CONTEXT_PLAYER:
       scrollContainer($(".sidemenu"), scrollVariation);
       break;
+    case CONTEXT_COMMAND:
+      hideSpeakDialog();
+      break;
+    case CONTEXT_HELP:
+      hideHelpPanel();
+      break;
   }
 }
 
@@ -71,6 +82,9 @@ function left() {
       break;
     case CONTEXT_PLAYLIST:
       closeSidebar();
+      break;
+    case CONTEXT_COMMAND:
+      hideSpeakDialog();
       break;
   }
 }
@@ -84,6 +98,9 @@ function right() {
     case CONTEXT_RESULTS:
       closeSearchPanel();
       break;
+    case CONTEXT_COMMAND:
+      hideSpeakDialog();
+      break;
   }
 }
 
@@ -92,6 +109,9 @@ function leftRight() {
     case CONTEXT_PLAYER:
       showSpeakDialog();
       break;
+    case CONTEXT_COMMAND:
+      hideSpeakDialog();
+      break;
   }
 }
 
@@ -99,6 +119,9 @@ function rightLeft() {
   switch (checkContext()) {
     case CONTEXT_PLAYER:
       showSpeakDialog();
+      break;
+    case CONTEXT_COMMAND:
+      hideSpeakDialog();
       break;
   }
 }
@@ -116,7 +139,11 @@ function performGesture(gesture) {
 }
 
 function checkContext() {
-  if ($('.search').hasClass('open')) {
+  if ($(".speak-dialog").hasClass("show")) {
+    return CONTEXT_COMMAND;
+  } else if ($(".help-panel").hasClass("show")) {
+    return CONTEXT_HELP;
+  } else if ($('.search').hasClass('open')) {
     if ($('.search').hasClass('expand')) {
       return CONTEXT_RESULTS;
     } else {
