@@ -48,7 +48,7 @@ function up() {
     case CONTEXT_RESULTS:
       scrollContainer($(".search"), -scrollVariation);
       break;
-    case CONTEXT_PLAYER:
+    case CONTEXT_PLAYLIST:
       scrollContainer($(".sidemenu"), -scrollVariation);
       break;
     case CONTEXT_COMMAND:
@@ -66,7 +66,7 @@ function down() {
     case CONTEXT_RESULTS:
       scrollContainer($(".search"), scrollVariation);
       break;
-    case CONTEXT_PLAYER:
+    case CONTEXT_PLAYLIST:
       scrollContainer($(".sidemenu"), scrollVariation);
       break;
     case CONTEXT_HELP:
