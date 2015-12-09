@@ -34,7 +34,7 @@ main {
   margin-top: 20px;
 }
 main img {
-  margin: 50px;
+  margin: 0 50px;
   -webkit-filter: grayscale(0%);
   transition: .5s ease-in-out;
   cursor: pointer;
@@ -42,6 +42,22 @@ main img {
 main img:hover {
   -webkit-filter: grayscale(70%);
 }
-main img:active {
+main img:active, main img.active {
   -webkit-filter: brightness(1.5);
+}
+.tutorial-image i {
+  transition: .5s ease-in-out;
+  font-size: 3em;
+  vertical-align: middle;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #fff;
+}
+.tutorial-image i.correct {
+  color: #4CAF50;
+}
+.tutorial-image img {
+  height: 100px;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
 }

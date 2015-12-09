@@ -3,7 +3,7 @@ $(document).ready(function() {
 
   setTimeout(function() {
     $('body').addClass('loaded');
-    setTimeout(search, 1000);
+    setTimeout(showHelpPanel, 1000);
   }, 1000);
 
   $('#nav-icon').click(function() {

@@ -20,16 +20,22 @@ $(document).ready(function() {
 
 
 function toEs() {
-  $("body").addClass("hide");
+  $('img.es').addClass('active');
   setTimeout(function() {
-    window.location.href = 'tutorial_es.html';
+    $("body").addClass("hide");
+    setTimeout(function() {
+      window.location.href = 'tutorial_es.html';
+    }, 1000);
   }, 500);
 }
 
 function toEn() {
-  $("body").addClass("hide");
+  $('img.en').addClass('active');
   setTimeout(function() {
-    window.location.href = 'tutorial_en.html';
+    $("body").addClass("hide");
+    setTimeout(function() {
+      window.location.href = 'tutorial_en.html';
+    }, 1000);
   }, 500);
 }
 

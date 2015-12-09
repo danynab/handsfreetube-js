@@ -1,11 +1,9 @@
 var recognition;
-//var language = "en-GB";
-var language = "es-ES";
 
 $(document).ready(function() {
   recognition = new webkitSpeechRecognition();
   recognition.continuous = false;
-  recognition.lang = language;
+  recognition.lang = $("body").data("lang");
   recognition.interimResults = true;
   recognition.onresult = function(event) {
     var result = event.results[event.results.length - 1];
