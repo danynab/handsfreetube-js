@@ -71,7 +71,6 @@ $(document).ready(function() {
 
     annyang.addCommands(commands);
     annyang.setLanguage(lang);
-    console.log(annyang);
     annyang.start();
   }
 });

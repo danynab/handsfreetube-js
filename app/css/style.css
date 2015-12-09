@@ -394,6 +394,29 @@ h1, .video {
 .playlist-item {
   color: white;
 }
+.playlist-item img {
+  height: 60px;
+  float: left;
+  margin-right: 10px;
+}
+.sidemenu ul {
+  display: table-cell;
+  list-style-type: none;
+  padding: 0;
+}
+.playlist-item {
+  overflow: auto;
+  padding: 10px;
+}
+.playlist-item p {
+  display: table-cell;
+  height: 50px;
+  margin: 0;
+  vertical-align: middle;
+}
+.playlist-item.active {
+  background-color: rgba(76, 175, 80, 0.8);
+}
 #myVideo {
   visibility: hidden;
   position: absolute;

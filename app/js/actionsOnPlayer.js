@@ -31,10 +31,11 @@ function onPlayerReady(event) {
 }
 
 var done = false;
+var currentPlaylist;
 
 function onPlayerStateChange(event) {
+  fillPlaylist(player.getPlaylistId());
   changeTitle();
-  fillPlaylist();
   setCurrentVolume();
   if (event.data == YT.PlayerState.PLAYING) {
     $('.play').addClass('fa-pause');
@@ -105,7 +106,7 @@ function setCurrentVolume() {
   $('.volume').attr('value', player.getVolume());
 }
 
-function fillPlaylist() {
+function fillPlaylist(id) {
   /*$('.sidemenu').find('ul').remove();
 
   // Fill playlist menu
@@ -116,7 +117,16 @@ function fillPlaylist() {
   list += "</ul>"
 
   $('.sidemenu').append(list);*/
-  iterar(0, player.getPlaylist());
+  requestVideosInPlaylist(id, createPlayList)
+  //iterar(0, player.getPlaylist());
+}
+
+function createPlayList(videos) {
+  var list = '';
+  videos.forEach(function(video) {
+    list += '<li class="playlist-item' + (player.getVideoData().video_id == video.id ? ' active' : '') + '" data-video="' + video.id + '"><img src="' + video.thumbnail + '"/><p>' + video.title + '</p></li>';
+  });
+  $('.sidemenu ul').html(list);
 }
 
 function iterar(i, videos) {

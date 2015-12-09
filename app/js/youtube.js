@@ -32,3 +32,23 @@ function requestNameVideo(id, callback) {
     }
   });
 }
+
+function requestVideosInPlaylist(id, callback) {
+  var url = baseUrl + '/playlistItems?part=snippet&maxResults=50&playlistId=' + id + '&key=' + key;
+  $.get(url, function(data) {
+    if (data.hasOwnProperty('items')) {
+      var videos = data.items.map(function(video) {
+        console.log(video);
+        var id = video.snippet.resourceId.videoId;
+        var title = video.snippet.title;
+        var thumbnail = video.snippet.thumbnails.high.url;
+        return {
+          id: id,
+          title: title,
+          thumbnail: thumbnail
+        };
+      });
+      callback(videos);
+    }
+  });
+}
