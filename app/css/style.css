@@ -5,7 +5,40 @@ html, body {
   overflow: hidden;
 }
 body {
+  opacity: 0;
+  transition: 1s ease-in-out;
   background-color: black;
+}
+body.loaded {
+  opacity: 1;
+}
+.welcome {
+  z-index: 50;
+  transition: 1s ease-in-out;
+  text-align: center;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  padding-top: 30%;
+}
+.welcome img {
+  display: inline;
+  vertical-align: middle;
+  height: 3em;
+}
+.welcome p.nameapp {
+  color: white;
+  display: inline;
+  height: 100%;
+  font-size: 3em;
+  vertical-align: middle;
+  margin: 5px;
+}
+.welcome.removed {
+  opacity: 0;
 }
 .bg {
   /*-webkit-filter: blur(5px);*/
@@ -195,7 +228,7 @@ h1, .video {
 .blur {
   -webkit-filter: blur(5px);
 }
-.blur:not(.content) {
+.blur:not(.content, .welcome) {
   pointer-events: none;
 }
 .content {
@@ -364,6 +397,7 @@ h1, .video {
   z-index: -99;
 }
 .speak-dialog {
+  z-index: 99;
   color: white;
   text-align: center;
   position: absolute;
@@ -389,12 +423,12 @@ h1, .video {
   color: #F44336;
 }
 .help-panel {
-  z-index: 99;
+  z-index: 89;
   color: white;
   position: absolute;
-  bottom: -380px;
+  bottom: -430px;
   width: 100%;
-  height: 400px;
+  height: 450px;
   text-align: center;
   transition: .5s ease-in-out;
 }
@@ -404,6 +438,9 @@ h1, .video {
 .help-panel .button {
   cursor: pointer;
   transition: .5s ease-in-out;
+}
+.help-panel.blur .button {
+  pointer-events: none;
 }
 .help-panel .button:hover, .help-panel.show .button {
   background-color: rgba(33, 150, 243, 0.5);
@@ -422,4 +459,87 @@ h1, .video {
 .help-content {
   height: 100%;
   background-color: rgba(33, 150, 243, 1);
+}
+.help-content .right-panel {
+  float: right;
+  width: 49%;
+}
+.help-content .left-panel {
+  float: left;
+  width: 49%;
+}
+.help-content h3 {
+  margin-bottom: 0;
+}
+.help-content h5 {
+  margin-top: 0;
+  font-size: 0.8em;
+  font-weight: normal;
+}
+.commands {
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.commands td {
+  padding: 5px;
+}
+.commands .command {
+  transition: .5s ease-in-out;
+  font-weight: bold;
+  text-align: right;
+  font-style: italic;
+  padding-left: 20px;
+}
+.commands .description {
+  text-align: left;
+  padding-right: 20px;
+}
+.tutorial-image i {
+  transition: .5s ease-in-out;
+  font-size: 1em;
+  vertical-align: middle;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #fff;
+}
+.tutorial-image i.correct {
+  color: #4CAF50;
+}
+.tutorial-image img {
+  height: 50px;
+  vertical-align: middle;
+}
+.tutorial-image.inline img, .tutorial-image.inline ul {
+  display: inline-block;
+  margin: 0;
+}
+.tutorial-image.inline ul {
+  padding: 0;
+  list-style-type: none;
+  vertical-align: middle;
+}
+.tutorial-image {
+  padding: 5px;
+  width: 40%;
+  float: left;
+}
+.gesture {
+  width: 100%;
+  display: inline-block;
+}
+.gesture-description {
+  vertical-align: middle;
+  height: 60px;
+}
+.gesture ul {
+  display: table-cell;
+  height: 60px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  vertical-align: middle;
+}
+.new {
+  opacity: 0;
+  pointer-events: none;
 }

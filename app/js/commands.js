@@ -58,8 +58,8 @@ $(document).ready(function() {
         'look for': function() {
           invokeCommand(search);
         },
-        'number *param': function() {
-          invokeCommand(selectNumber);
+        'number *param': function(param) {
+          invokeCommand(selectNumber, param);
         },
         'help': function() {
           invokeCommand(showHelpPanel);
@@ -72,9 +72,9 @@ $(document).ready(function() {
   }
 });
 
-function invokeCommand(command) {
+function invokeCommand(command, param) {
   hideSpeakDialog();
-  command();
+  command(param);
 }
 
 function search() {

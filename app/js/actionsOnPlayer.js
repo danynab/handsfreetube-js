@@ -1,4 +1,3 @@
-
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -48,7 +47,11 @@ function onPlayerStateChange(event) {
     //setTimeout(stopVideo, 6000);
     done = true;
   }
-
+  if ($('.welcome').hasClass('removed') && $('.video').hasClass('new')) {
+    $('.video').removeClass('new');
+    $('h1').removeClass('new');
+    $('h1').addClass('animated fadeInDownBig');
+  }
 }
 
 function stopVideo() {
@@ -179,6 +182,7 @@ function selectNumber(param) {
       listType: 'playlist'
     });
     closeSearchPanel();
+    showAll();
   }
 }
 

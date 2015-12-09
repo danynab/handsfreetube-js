@@ -66,9 +66,6 @@ function down() {
     case CONTEXT_PLAYER:
       scrollContainer($(".sidemenu"), scrollVariation);
       break;
-    case CONTEXT_COMMAND:
-      hideSpeakDialog();
-      break;
     case CONTEXT_HELP:
       hideHelpPanel();
       break;
@@ -83,9 +80,6 @@ function left() {
     case CONTEXT_PLAYLIST:
       closeSidebar();
       break;
-    case CONTEXT_COMMAND:
-      hideSpeakDialog();
-      break;
   }
 }
 
@@ -98,30 +92,27 @@ function right() {
     case CONTEXT_RESULTS:
       closeSearchPanel();
       break;
-    case CONTEXT_COMMAND:
-      hideSpeakDialog();
-      break;
   }
 }
 
 function leftRight() {
   switch (checkContext()) {
-    case CONTEXT_PLAYER:
-      showSpeakDialog();
-      break;
     case CONTEXT_COMMAND:
       hideSpeakDialog();
+      break;
+    default:
+      showSpeakDialog();
       break;
   }
 }
 
 function rightLeft() {
   switch (checkContext()) {
-    case CONTEXT_PLAYER:
-      showSpeakDialog();
-      break;
     case CONTEXT_COMMAND:
       hideSpeakDialog();
+      break;
+    default:
+      showSpeakDialog();
       break;
   }
 }

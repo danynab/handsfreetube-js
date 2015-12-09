@@ -11,6 +11,10 @@
 </head>
 
 <body>
+  <div class="welcome">
+    <img src="images/logo.png" />
+    <p class="nameapp">HandsfreeTube</p>
+  </div>
   <video id="myVideo" width="400" height="300" preload autoplay loop muted></video>
   <div class="sidemenu">
     <div class="bg"></div>
@@ -51,6 +55,103 @@
       <p><i class="fa fa-chevron-up"></i> Help</p>
     </div>
     <div class="help-content">
+      <div class="left-panel">
+        <h3>Gestures avaliable</h3>
+        <h5>Note: Gestures depend on the context (player, search, ...).</h5>
+        <div class="gesture">
+          <div class="tutorial-image">
+            <i class="fa fa-arrow-left left"></i>
+            <img src="images/high-five.png" />
+          </div>
+          <ul>
+            <li>Next video.</li>
+            <li>Hide playlist sidemenu.</li>
+          </ul>
+        </div>
+        <div class="gesture">
+          <div class="tutorial-image">
+            <img src="images/high-five.png" />
+            <i class="fa fa-arrow-right right"></i>
+          </div>
+          <ul>
+            <li>Previous video.</li>
+            <li>Hide search sidemenu.</li>
+          </ul>
+        </div>
+        <div class="gesture">
+          <div class="tutorial-image">
+            <i class="fa fa-arrow-up up"></i>
+            <img src="images/high-five.png" />
+          </div>
+          <ul>
+            <li>Increase volume.</li>
+            <li>Hide speak dialog.</li>
+            <li>Scroll up where is needed.</li>
+          </ul>
+        </div>
+        <div class="gesture">
+          <div class="tutorial-image">
+            <img src="images/high-five.png" />
+            <i class="fa fa-arrow-down down"></i>
+          </div>
+          <ul>
+            <li>Decrease volume.</li>
+            <li>Hide this help menu.</li>
+            <li>Scroll down where is needed.</li>
+          </ul>
+        </div>
+        <div class="gesture">
+          <div class="tutorial-image inline">
+            <ul class="right-left">
+              <li><i class="fa fa-arrow-right"></i></li>
+              <li><i class="fa fa-arrow-left"></i></li>
+            </ul>
+            <img src="images/high-five.png" />
+            <ul class="left-right">
+              <li><i class="fa fa-arrow-left"></i></li>
+              <li><i class="fa fa-arrow-right"></i></li>
+            </ul>
+          </div>
+          <div class="gesture-description">
+            <ul>
+              <li>Enable voice commands and</li>
+              <li>show commands dialog.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="right-panel">
+        <h3>Voice commands avaliable</h3>
+        <h5>Remember: You need enable the voice commands with the specific gesture.</h5>
+        <table class="commands">
+          <tbody>
+            <tr>
+              <td class="command lookfor">look for</td>
+              <td class="description">Look for a playlist.</td>
+            </tr>
+            <tr>
+              <td class="command playlist">playlist</td>
+              <td class="description">Show the playlist.</td>
+            </tr>
+            <tr>
+              <td class="command play">play</td>
+              <td class="description">Start the video.</td>
+            </tr>
+            <tr>
+              <td class="command stop">stop</td>
+              <td class="description">Stop the video.</td>
+            </tr>
+            <tr>
+              <td class="command number">number X</td>
+              <td class="description">Select the option X.</td>
+            </tr>
+            <tr>
+              <td class="command help">help</td>
+              <td class="description">Show help menu.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
   <div class="right-icons">
@@ -66,12 +167,12 @@
       </div>
     </div>
     <div class="options">
-      <i class="fa fa-video-camera active"></i>
+      <!--<i class="fa fa-video-camera active"></i>
       <br>
       <i class="fa fa-repeat inactive"></i>
       <br>
       <i class="fa fa-random inactive"></i>
-      <br>
+      <br>-->
       <i class="fa fa-hand-paper-o active"></i>
       <br>
       <i class="fa fa-microphone active"></i>
