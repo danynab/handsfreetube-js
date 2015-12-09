@@ -1,9 +1,10 @@
 var recognition;
 
 $(document).ready(function() {
+  var lang = $("body").data("lang");
   recognition = new webkitSpeechRecognition();
   recognition.continuous = false;
-  recognition.lang = $("body").data("lang");
+  recognition.lang = lang;
   recognition.interimResults = true;
   recognition.onresult = function(event) {
     var result = event.results[event.results.length - 1];
@@ -20,48 +21,57 @@ $(document).ready(function() {
   }
 
   if (annyang) {
-    var commands = {
-      //Spanish
-      'reproducir': function() {
-        invokeCommand(playVideo);
-      },
-      'parar': function() {
-        invokeCommand(stopVideo);
-      },
-      'playlist': function() {
-        invokeCommand(showPlaylist);
-      },
-      'buscar': function() {
-        invokeCommand(search);
-      },
-      'numero *param': function() {
-        invokeCommand(selectNumber);
-      },
-      'ayuda': function() {
-        invokeCommand(showHelpPanel);
-      },
-      // English
-      'play': function() {
-        invokeCommand(playVideo);
-      },
-      'stop': function() {
-        invokeCommand(stopVideo);
-      },
-      'playlist': function() {
-        invokeCommand(showPlaylist);
-      },
-      'look for': function() {
-        invokeCommand(search);
-      },
-      'number *param': function(param) {
-        invokeCommand(selectNumber, param);
-      },
-      'help': function() {
-        invokeCommand(showHelpPanel);
-      }
+    var commands;
+
+    if (lang == 'es-ES') {
+      commands = {
+        //Spanish
+        'reproducir': function() {
+          invokeCommand(playVideo);
+        },
+        'parar': function() {
+          invokeCommand(stopVideo);
+        },
+        'lista de reproducción': function() {
+          invokeCommand(showPlaylist);
+        },
+        'buscar': function() {
+          invokeCommand(search);
+        },
+        'número *param':  function(param) {
+          invokeCommand(selectNumber, param);
+        },
+        'ayuda': function() {
+          invokeCommand(showHelpPanel);
+        }
+      };
+    } else {
+      commands = {
+        // English
+        'play': function() {
+          invokeCommand(playVideo);
+        },
+        'stop': function() {
+          invokeCommand(stopVideo);
+        },
+        'playlist': function() {
+          invokeCommand(showPlaylist);
+        },
+        'look for': function() {
+          invokeCommand(search);
+        },
+        'number *param': function(param) {
+          invokeCommand(selectNumber, param);
+        },
+        'help': function() {
+          invokeCommand(showHelpPanel);
+        }
+      };
     }
 
     annyang.addCommands(commands);
+    annyang.setLanguage(lang);
+    console.log(annyang);
     annyang.start();
   }
 });

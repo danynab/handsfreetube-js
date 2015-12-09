@@ -94,6 +94,10 @@ $(document).ready(function() {
       showHelpPanel();
     }
   });
+
+  $('.fa-language').click(function() {
+    window.location.href = 'index.html';
+  });
 });
 
 function hideAll() {

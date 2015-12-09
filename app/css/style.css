@@ -252,7 +252,7 @@ h1, .video {
   bottom: 0;
   height: 2.5em;
   color: white;
-  z-index: 50;
+  z-index: 60;
   font-size: 1.8em;
 }
 .footer .bg {
@@ -338,6 +338,10 @@ h1, .video {
   right: 0;
   padding: 20px;
   color: white;
+  z-index: 50;
+}
+.options.blur i {
+  pointer-events: none;
 }
 .right-icons .bg {
   position: absolute;
@@ -346,7 +350,6 @@ h1, .video {
   top: 0;
   right: 0;
   height: 100%;
-  z-index: 0;
 }
 .right-icons i {
   z-index: 89;

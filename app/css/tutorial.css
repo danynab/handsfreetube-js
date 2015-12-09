@@ -98,6 +98,7 @@ p {
 .commands {
   margin: 0 auto;
   margin-top: 20px;
+  width: 80%;
 }
 .commands td {
   padding: 5px;
@@ -131,4 +132,8 @@ footer a {
 }
 footer a:hover {
   font-weight: bold;
+}
+
+a.skip {
+  margin: 0 20px;
 }

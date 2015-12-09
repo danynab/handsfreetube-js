@@ -7,7 +7,11 @@ var lastRigth = new Date().getTime();
 var gestureTimeout;
 var gestureDelay = 300;
 
+var lang;
+
 $(document).ready(function() {
+  lang = $("body").data("lang");
+
   $("a.skip").click(goToPlayer);
 
   gest.start();
@@ -44,59 +48,67 @@ $(document).ready(function() {
   });
 
   if (annyang) {
-    var commands = {
-      "reproducir": function() {
-        $(".command.play").addClass("correct");
-        checkCommands();
-      },
-      "parar": function() {
-        $(".command.stop").addClass("correct");
-        checkCommands();
-      },
-      "playlist": function() {
-        $(".command.playlist").addClass("correct");
-        checkCommands();
-      },
-      "buscar": function() {
-        $(".command.lookfor").addClass("correct");
-        checkCommands();
-      },
-      "numero *param": function() {
-        $(".command.number").addClass("correct");
-        checkCommands();
-      },
-      "ayuda": function() {
-        $(".command.help").addClass("correct");
-        checkCommands();
-      },
-      //English
-      "play": function() {
-        $(".command.play").addClass("correct");
-        checkCommands();
-      },
-      "stop": function() {
-        $(".command.stop").addClass("correct");
-        checkCommands();
-      },
-      "playlist": function() {
-        $(".command.playlist").addClass("correct");
-        checkCommands();
-      },
-      "look for": function() {
-        $(".command.lookfor").addClass("correct");
-        checkCommands();
-      },
-      "number *param": function() {
-        $(".command.number").addClass("correct");
-        checkCommands();
-      },
-      "help": function() {
-        $(".command.help").addClass("correct");
-        checkCommands();
-      }
+    var commands;
+
+    if (lang == 'es-ES') {
+      commands = {
+        "reproducir": function() {
+          $(".command.play").addClass("correct");
+          checkCommands();
+        },
+        "parar": function() {
+          $(".command.stop").addClass("correct");
+          checkCommands();
+        },
+        "lista de reproducción": function() {
+          $(".command.playlist").addClass("correct");
+          checkCommands();
+        },
+        "buscar": function() {
+          $(".command.lookfor").addClass("correct");
+          checkCommands();
+        },
+        "número *param": function() {
+          $(".command.number").addClass("correct");
+          checkCommands();
+        },
+        "ayuda": function() {
+          $(".command.help").addClass("correct");
+          checkCommands();
+        }
+      };
+    } else {
+      commands = {
+        //English
+        "play": function() {
+          $(".command.play").addClass("correct");
+          checkCommands();
+        },
+        "stop": function() {
+          $(".command.stop").addClass("correct");
+          checkCommands();
+        },
+        "playlist": function() {
+          $(".command.playlist").addClass("correct");
+          checkCommands();
+        },
+        "look for": function() {
+          $(".command.lookfor").addClass("correct");
+          checkCommands();
+        },
+        "number *param": function() {
+          $(".command.number").addClass("correct");
+          checkCommands();
+        },
+        "help": function() {
+          $(".command.help").addClass("correct");
+          checkCommands();
+        }
+      };
     }
 
     annyang.addCommands(commands);
+    annyang.setLanguage(lang);
     annyang.start();
   }
 });
@@ -125,6 +137,7 @@ function checkCommands() {
 }
 
 function up() {
+  console.log("up");
   switch (tutorialStep) {
     case 1:
       if (!$("i.up").hasClass("correct")) {
@@ -139,6 +152,7 @@ function up() {
 }
 
 function down() {
+  console.log("down");
   switch (tutorialStep) {
     case 1:
       if (!$("i.down").hasClass("correct")) {

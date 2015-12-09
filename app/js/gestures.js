@@ -40,6 +40,7 @@ $(document).ready(function() {
 });
 
 function up() {
+  console.log('up');
   switch (checkContext()) {
     case CONTEXT_PLAYER:
       volumeUp();
@@ -57,6 +58,7 @@ function up() {
 }
 
 function down() {
+  console.log('down');
   switch (checkContext()) {
     case CONTEXT_PLAYER:
       volumeDown();
@@ -74,6 +76,7 @@ function down() {
 }
 
 function left() {
+  console.log('left');
   switch (checkContext()) {
     case CONTEXT_PLAYER:
       nextVideo();
@@ -85,6 +88,7 @@ function left() {
 }
 
 function right() {
+  console.log('right');
   switch (checkContext()) {
     case CONTEXT_PLAYER:
       previousVideo();
@@ -97,6 +101,7 @@ function right() {
 }
 
 function leftRight() {
+  console.log("left - right");
   switch (checkContext()) {
     case CONTEXT_COMMAND:
       hideSpeakDialog();
@@ -108,6 +113,7 @@ function leftRight() {
 }
 
 function rightLeft() {
+  console.log("right - left");
   switch (checkContext()) {
     case CONTEXT_COMMAND:
       hideSpeakDialog();
